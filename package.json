@@ -1,5 +1,8 @@
 {
-  "name": "tanstack_start_ts",
+  "name": "fala-comigo",
+  "version": "1.0.0",
+  "description": "Prancha de palavras para crianças com dificuldades de fala: tocar, ouvir e montar frases.",
+  "license": "MIT",
   "private": true,
   "sideEffects": false,
   "type": "module",
