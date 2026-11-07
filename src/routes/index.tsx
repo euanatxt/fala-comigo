@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { Volume2, Delete, X } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -64,35 +65,35 @@ function Index() {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-5xl flex-col gap-4 p-3 sm:p-6">
-      <h1 className="text-center text-3xl font-extrabold text-primary sm:text-4xl">🗣️ Fala Comigo</h1>
+      <header className="flex items-baseline justify-between px-1"><h1 className="text-2xl font-semibold tracking-tight text-primary">Fala Comigo</h1><span className="text-sm text-muted-foreground">toque para falar</span></header>
 
-      <section className="sticky top-2 z-10 rounded-3xl border-4 border-pink bg-card p-3 shadow-lg">
+      <section className="sticky top-2 z-10 rounded-2xl border bg-card p-3 shadow-sm">
         <div className="flex min-h-20 flex-wrap items-center gap-2">
           {sentence.length === 0 && (
-            <p className="px-2 text-lg text-muted-foreground">Toque nas palavras para montar uma frase ✨</p>
+            <p className="px-2 text-lg text-muted-foreground">Toque nas palavras para montar uma frase</p>
           )}
           {sentence.map((w, i) => (
             <button key={i} onClick={() => setSentence(sentence.filter((_, j) => j !== i))}
-              className="flex flex-col items-center rounded-2xl bg-lemon px-3 py-1 text-base font-bold">
+              className="flex flex-col items-center rounded-xl border bg-background px-3 py-1 text-sm font-medium">
               <span className="text-2xl">{w.e}</span>{w.t}
             </button>
           ))}
         </div>
         <div className="mt-3 grid grid-cols-3 gap-2">
           <button onClick={() => speak(sentence.map((w) => w.t).join(" "))} disabled={!sentence.length}
-            className="rounded-2xl bg-mint py-3 text-lg font-extrabold transition active:scale-95 disabled:opacity-40">🔊 Falar</button>
+            className="rounded-2xl bg-primary text-primary-foreground flex items-center justify-center gap-2 py-3 font-semibold transition active:scale-95 disabled:opacity-40"><Volume2 className="size-5" /> Falar</button>
           <button onClick={() => setSentence(sentence.slice(0, -1))} disabled={!sentence.length}
-            className="rounded-2xl bg-peach py-3 text-lg font-extrabold transition active:scale-95 disabled:opacity-40">⬅️ Apagar</button>
+            className="rounded-2xl bg-secondary flex items-center justify-center gap-2 py-3 font-semibold transition active:scale-95 disabled:opacity-40"><Delete className="size-5" /> Apagar</button>
           <button onClick={() => setSentence([])} disabled={!sentence.length}
-            className="rounded-2xl bg-pink py-3 text-lg font-extrabold transition active:scale-95 disabled:opacity-40">🗑️ Limpar</button>
+            className="rounded-2xl bg-secondary flex items-center justify-center gap-2 py-3 font-semibold transition active:scale-95 disabled:opacity-40"><X className="size-5" /> Limpar</button>
         </div>
       </section>
 
       <nav className="flex gap-2 overflow-x-auto pb-1">
         {CATS.map((k, i) => (
           <button key={k.name} onClick={() => setCat(i)}
-            className={`shrink-0 rounded-full px-4 py-2 text-lg font-bold transition ${k.bg} ${i === cat ? "ring-4 ring-primary scale-105" : "opacity-80"}`}>
-            {k.e} {k.name}
+            className={`shrink-0 rounded-full px-4 py-2 font-medium transition ${k.bg} ${i === cat ? "ring-2 ring-primary" : "opacity-70"}`}>
+            {k.name}
           </button>
         ))}
       </nav>
@@ -100,9 +101,9 @@ function Index() {
       <section className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
         {c.words.map((w) => (
           <button key={w.t} onClick={() => { speak(w.t); setSentence((s) => [...s, w]); }}
-            className={`flex aspect-square flex-col items-center justify-center rounded-3xl ${c.bg} p-2 shadow-md transition hover:-translate-y-1 active:scale-90`}>
-            <span className="text-5xl sm:text-6xl">{w.e}</span>
-            <span className="mt-1 text-center text-lg font-bold leading-tight text-foreground">{w.t}</span>
+            className={`flex aspect-square flex-col items-center justify-center rounded-2xl border ${c.bg} p-2 transition hover:brightness-95 active:scale-95`}>
+            <span className="text-4xl sm:text-5xl">{w.e}</span>
+            <span className="mt-2 text-center text-base font-medium leading-tight text-foreground">{w.t}</span>
           </button>
         ))}
       </section>
