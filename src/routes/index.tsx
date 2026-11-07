@@ -60,7 +60,7 @@ function speak(text: string) {
 function Index() {
   const [cat, setCat] = useState(0);
   const [sentence, setSentence] = useState<W[]>([]);
-  const c = CATS[cat];
+  const c = CATS[cat] ?? CATS[0]!;
 
   return (
     <main className="mx-auto flex min-h-screen max-w-5xl flex-col gap-4 p-3 sm:p-6">
